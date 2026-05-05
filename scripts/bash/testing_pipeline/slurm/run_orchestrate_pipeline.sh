@@ -6,7 +6,6 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --output=.slurm/pipeline/%x_%j.out
 #SBATCH --error=.slurm/pipeline/%x_%j.err
-#SBATCH --nodelist=noether
 
 set -euo pipefail
 
