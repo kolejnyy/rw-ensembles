@@ -1,0 +1,13 @@
+# SinglePassProver (DeepSeek-Prover-V2 via vLLM) on full augmented miniF2F test export.
+# Dataset: data/minif2f-aug-test.jsonl (all rows use split "test").
+prover: configs/models/deepseek-single-pass-baseline-vllm.yaml
+
+dataset_path: data/minif2f-aug.jsonl
+split: test
+
+dataset_name: minif2f-aug
+
+num_attempts: 64
+batch_size: 64
+
+# All problems in the file (no limit).

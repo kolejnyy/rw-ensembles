@@ -1,0 +1,13 @@
+# TODO run: Goedel-Prover-V2-8B SinglePassProver on full ProofNet test split.
+prover: configs/models/goedel-prover-v2-8b-single-pass-vllm.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: goedel-prover-v2-8b-test
+
+num_attempts: 16
+batch_size: 8
+
+start_from: 0

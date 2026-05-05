@@ -1,0 +1,13 @@
+# SinglePassProver (DeepSeek-Prover-V2 non-CoT via vLLM) on ineq-transformed test split.
+prover: configs/models/deepseek-single-pass-baseline-vllm.yaml
+
+dataset_path: data/ineq-transformed.jsonl
+split: test
+
+dataset_name: ineq-transformed
+experiment_id: deepseek-single-pass
+
+num_attempts: 64
+batch_size: 16
+
+start_from: 0

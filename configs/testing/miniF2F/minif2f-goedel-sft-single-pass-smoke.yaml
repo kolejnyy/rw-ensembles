@@ -1,0 +1,13 @@
+# Limited/smoke run: Goedel-Prover-SFT single-pass on miniF2F valid.
+prover: configs/models/goedel-sft-single-pass-vllm.yaml
+
+dataset_path: data/minif2f.jsonl
+split: valid
+
+dataset_name: minif2f
+experiment_id: goedel-sft-single-pass-smoke
+
+num_attempts: 32
+batch_size: 16
+limit: 20
+start_from: 0

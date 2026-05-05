@@ -1,0 +1,23 @@
+# SinglePassProver with AI-MO/Kimina-Prover-Distill-8B via vLLM.
+class: SinglePassProver
+
+parameters:
+  llm:
+    class: VLLMChatLLM
+    parameters:
+      model_name_or_path: AI-MO/Kimina-Prover-Distill-8B
+      max_new_tokens: 8096
+      max_model_len: 8192
+      tensor_parallel_size: 1
+      gpu_memory_utilization: 0.9
+      max_num_seqs: 8
+      temperature: 0.6
+      top_p: 0.95
+      use_chat_template: true
+
+  prompt_formatter:
+    class: KiminaProverPromptFormatter
+    parameters: {}
+
+  project_root: .
+  timeout_seconds: 120.0

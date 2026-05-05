@@ -1,0 +1,20 @@
+# SinglePassProver with DeepSeek-Prover-V2-7B via vLLM using CoT-style prompt.
+class: SinglePassProver
+
+parameters:
+  llm:
+    class: VLLMChatLLM
+    parameters:
+      model_name_or_path: deepseek-ai/DeepSeek-Prover-V2-7B
+      max_new_tokens: 8191
+      max_model_len: 8192
+      tensor_parallel_size: 1
+      gpu_memory_utilization: 0.85
+      max_num_seqs: 16  # for prove_batch / generate_batch; use 1 for single-sequence only
+
+  prompt_formatter:
+    class: DeepSeekProverCoTPromptFormatter
+    parameters: {}
+
+  project_root: .
+  timeout_seconds: 120.0

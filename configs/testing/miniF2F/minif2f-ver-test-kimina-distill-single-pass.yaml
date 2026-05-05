@@ -1,0 +1,11 @@
+# TODO run: Kimina-Prover-Distill SinglePassProver on miniF2F-ver test split.
+prover: configs/models/kimina-distill-single-pass-vllm.yaml
+
+dataset_path: data/minif2f.jsonl
+split: test
+
+dataset_name: minif2f-ver
+experiment_id: kimina-distill-single-pass-minif2f-ver-test
+
+num_attempts: 16
+batch_size: 8

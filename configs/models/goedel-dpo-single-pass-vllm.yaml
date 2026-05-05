@@ -1,0 +1,23 @@
+# SinglePassProver with Goedel-Prover-DPO via vLLM (plain completion mode).
+class: SinglePassProver
+
+parameters:
+  llm:
+    class: VLLMChatLLM
+    parameters:
+      model_name_or_path: Goedel-LM/Goedel-Prover-DPO
+      max_new_tokens: 2048
+      max_model_len: 4096
+      tensor_parallel_size: 1
+      gpu_memory_utilization: 0.9
+      max_num_seqs: 8
+      temperature: 1.0
+      top_p: 0.95
+      use_chat_template: false
+
+  prompt_formatter:
+    class: GoedelProverSFTPromptFormatter
+    parameters: {}
+
+  project_root: .
+  timeout_seconds: 120.0

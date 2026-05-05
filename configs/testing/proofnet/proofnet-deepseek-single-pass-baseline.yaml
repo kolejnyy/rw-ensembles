@@ -1,0 +1,9 @@
+# Baseline: SinglePassProver (DeepSeek-Prover-V2) on ProofNet, no rewriting
+prover: configs/models/deepseek-single-pass-baseline-vllm.yaml
+
+dataset_path: data/proofnet.jsonl
+split: valid
+
+num_attempts: 100
+batch_size: 16
+limit: 100

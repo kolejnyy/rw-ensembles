@@ -1,0 +1,26 @@
+# Add your project dependencies here
+# Example:
+# numpy>=1.20.0
+# scipy>=1.7.0
+
+# HuggingFace datasets for loading datasets
+datasets>=2.14.0
+
+# Lean LSP client for extracting proof states
+leanclient
+
+# Progress bars
+tqdm>=4.65.0
+
+# Training dependencies
+transformers>=4.37.0
+trl>=0.7.0
+peft>=0.6.0
+bitsandbytes>=0.41.0
+accelerate>=0.25.0
+torch>=2.0.0
+tensorboard>=2.14.0
+pyyaml>=6.0.0
+
+# vLLM for faster LLM inference (optional; install with: pip install vllm)
+vllm>=0.6.0
