@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "invpro"
 version = "0.1.0"
-description = "A research project on proof-invariant formal provers in Lean4"
+description = "A research project rewriting ensembles for success invariance in Lean4"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
