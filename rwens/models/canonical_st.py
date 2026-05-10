@@ -16,7 +16,7 @@ import re
 from pathlib import Path
 from typing import Optional
 
-from rwens.canonicalization.base import CanonicalizationModule
+from rwens.rewriting.base import CanonicalizationModule
 from rwens.dataset.utils import split_declarations_theorem_proof
 from rwens.models.base import FormalProver
 from rwens.models.llm.base import BaseLLM

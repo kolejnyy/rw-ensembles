@@ -1,24 +1,17 @@
-"""
-Identity canonicalization module.
-
-Implements CanonicalizationModule with no transformations: augmented state
-equals original state.
-"""
+"""Minimal LSP-backed Lean session with no rewriting augmentation."""
 
 from __future__ import annotations
 
-from typing import Optional, Sequence, Tuple, Union
+from typing import Optional, Tuple
 
-from rwens.canonicalization.base import SimpleCanonicalizationModule
-from rwens.utils.applier import StateFetchAbort, GOAL_TIMEOUT_SECONDS, TacticApplier
+from rwens.rewriting.base import SimpleCanonicalizationModule
+from rwens.utils.applier import GOAL_TIMEOUT_SECONDS, StateFetchAbort, TacticApplier
 
 
-class IdentityModule(SimpleCanonicalizationModule):
+class PlainLeanSession(SimpleCanonicalizationModule):
     """
-    Canonicalization module that applies no transformations.
-
-    Implements all CanonicalizationModule methods; augmented_state always equals
-    current_state.
+    Temp Lean file + LSP client where augmented state equals the current goal state.
+    Used for round-trip checks and dataset tooling that do not apply rewrite augmentation.
     """
 
     def __init__(
@@ -26,23 +19,20 @@ class IdentityModule(SimpleCanonicalizationModule):
         project_root: str,
         initial_imports: str = "import Mathlib\n",
         timeout_seconds: float = GOAL_TIMEOUT_SECONDS,
+        *,
+        temp_suffix: str = "plain",
     ) -> None:
         super().__init__(
             project_root=project_root,
             initial_imports=initial_imports,
             timeout_seconds=timeout_seconds,
-            temp_suffix="identity",
+            temp_suffix=temp_suffix,
         )
 
     def get_states(
         self,
         keep_augmentation: bool = False,
     ) -> Tuple[Optional[str], Optional[str]]:
-        """
-        Return (current_state, augmented_state).
-
-        No transformations are applied: augmented_state equals current_state.
-        """
         if self._applier is None or self._cached_state is None:
             self._applier = self._applier or TacticApplier(
                 self.sfc, timeout_seconds=self.timeout_seconds

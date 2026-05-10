@@ -6,7 +6,7 @@ to build pipeline components. Cache keys and structured entries live in cache;
 filtering in filters.
 """
 
-from rwens.canonicalization.rewrites.cache import (
+from rwens.rewriting.rewrites.cache import (
     CacheEntry,
     ConfidenceCacheEntry,
     FirstTacticCacheEntry,
@@ -25,21 +25,21 @@ from rwens.canonicalization.rewrites.cache import (
     save_rewrites_cache,
     theorem_surprise_cache_key,
 )
-from rwens.canonicalization.rewrites.energy import (
+from rwens.rewriting.rewrites.energy import (
     get_energy_heuristic,
     make_confidence_energy_cached,
     make_confidence_energy_uncached,
     make_single_pass_confidence_energy,
     make_theorem_surprise_energy,
 )
-from rwens.canonicalization.rewrites.filters import (
+from rwens.rewriting.rewrites.filters import (
     filter_rewrites_by_namespace,
     filter_rewrites_by_namespace_blacklist,
     lemma_namespaces_from_tactic,
     namespaces_from_premise,
 )
-from rwens.canonicalization.rewrites.energy import aggregate_probs
-from rwens.canonicalization.rewrites.heuristics import (
+from rwens.rewriting.rewrites.energy import aggregate_probs
+from rwens.rewriting.rewrites.heuristics import (
     StateCandidate,
     get_reranking_heuristic,
     rerank_top_k_complexity_depth,

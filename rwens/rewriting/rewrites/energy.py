@@ -15,7 +15,7 @@ from rwens.dataset.utils import split_declarations_theorem_proof
 from rwens.models.llm.base import BaseLLM
 from rwens.utils.cache_paths import get_conf_cache_dir
 
-from rwens.canonicalization.rewrites.cache import (
+from rwens.rewriting.rewrites.cache import (
     confidence_cache_key,
     first_tactic_cache_key,
     theorem_surprise_cache_key,

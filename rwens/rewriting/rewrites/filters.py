@@ -7,7 +7,7 @@ from __future__ import annotations
 import re
 from typing import List, Optional
 
-from rwens.canonicalization.rewrites.cache import RewriteEntry
+from rwens.rewriting.rewrites.cache import RewriteEntry
 
 # Match Lean namespace prefix: uppercase identifier followed by dot (e.g. RCLike., Real., Int.)
 NAMESPACE_PREFIX_RE = re.compile(r"\b([A-Z][a-zA-Z0-9_]*)\.", re.ASCII)

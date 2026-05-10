@@ -121,7 +121,7 @@ class SimpleCanonicalizationModule(CanonicalizationModule):
     This class provides the common lifecycle: a temp file under ``.temp/``,
     an LSP client that keeps that file open, a TacticApplier for applying
     tactics and reading goal state, and cached state to avoid repeated
-    LSP calls. Subclasses (e.g. IdentityModule, VariableRenamer) inherit
+    LSP calls. Subclasses (e.g. RewritingCanonicalizationModule) inherit
     reset, update, apply_tactic, get_current_state, get_file_content,
     get_diagnostics, and close; they must implement get_states to define
     how the augmented state is produced (e.g. identity vs. revert/intro

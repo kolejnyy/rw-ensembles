@@ -22,7 +22,7 @@ from pathlib import Path
 _project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_project_root))
 
-from rwens.canonicalization.identity import IdentityModule
+from rwens.utils.plain_lean_session import PlainLeanSession
 from rwens.dataset.utils import split_declarations_theorem_proof
 from rwens.utils.state_to_statement import (
     StateProblemConverter,
@@ -96,7 +96,7 @@ def main() -> int:
     print(f"Testing {len(problems)} problems from {dataset_path} (split={args.split})")
     print()
 
-    module = IdentityModule(project_root=str(project_root), timeout_seconds=120.0)
+    module = PlainLeanSession(project_root=str(project_root), timeout_seconds=120.0)
     converter = StateProblemConverter(project_root=str(project_root), timeout_seconds=120.0)
 
     try:

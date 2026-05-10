@@ -2,7 +2,7 @@
 Single-file processing for augmented dataset generation.
 
 Processes one full.lean file: split proof into tactics, fetch states via LSP,
-run VariableRenamer, write tactic_XXXX.txt entries under out_dir/<uuid>/.
+replays tactics in a plain Lean session, write tactic_XXXX.txt entries under out_dir/<uuid>/.
 
 Can be run as a worker subprocess:
   python -m rwens.dataset.generate_augmented <lean_path> <project_root> <out_dir>
@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import leanclient as lc
 
-from rwens.canonicalization.renaming import VariableRenamer
+from rwens.utils.plain_lean_session import PlainLeanSession
 from rwens.logger import get_logger, set_log_file
 from rwens.utils.applier import StateFetchAbort
 from rwens.multithreading.utils import run_with_timeout
@@ -161,7 +161,7 @@ def process_one_file(
             return {"ok": True, "uuid": uuid, "saved": 0}
 
         _, proof_lines = TacticSplitter._find_proof_lines(full_text)
-        iterative = VariableRenamer(project_root)
+        iterative = PlainLeanSession(project_root)
 
         try:
             iterative.reset(decls, theorem_stmt)
@@ -188,7 +188,7 @@ def process_one_file(
                 except StateFetchAbort as e:
                     return {"ok": False, "uuid": uuid, "error": str(e)}
 
-                augmented_tactic = iterative._rename_tactic(tactic_text)
+                augmented_tactic = tactic_text
                 prefix_at_tactic = prefix_full
 
                 entry_file = out_dir / uuid / f"tactic_{idx:04d}.txt"
@@ -204,7 +204,7 @@ def process_one_file(
                         f.write("-" * 40 + "\n")
                         f.write(original_state.rstrip() + "\n")
                         f.write("-" * 40 + "\n")
-                        f.write("PRE_AUGMENTED_STATE (variable renamer):\n")
+                        f.write("PRE_AUGMENTED_STATE (plain Lean session):\n")
                         f.write("-" * 40 + "\n")
                         f.write(pre_augmented_state.rstrip() + "\n")
                         f.write("-" * 40 + "\n\n")

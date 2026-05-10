@@ -1,5 +1,5 @@
 import re
-from rwens.canonicalization.utils import extract_all_declarations
+from rwens.rewriting.utils import extract_all_declarations
 
 def extract_state_text(result) -> str:
     """

@@ -14,14 +14,14 @@ from pathlib import Path
 from tqdm import tqdm
 from typing import Callable, List, Optional
 
-from rwens.canonicalization.rewrites import (
+from rwens.rewriting.rewrites import (
     get_states_cache_key,
     load_get_states_entry,
     make_single_pass_confidence_energy,
     make_theorem_surprise_energy,
 )
-from rwens.canonicalization.rewrites.cache import GetStatesCacheEntry
-from rwens.canonicalization.utils import ensure_rewrites_import
+from rwens.rewriting.rewrites.cache import GetStatesCacheEntry
+from rwens.rewriting.utils import ensure_rewrites_import
 from rwens.utils.cache_paths import get_rw_cache_dir
 from rwens.dataset.utils import split_declarations_theorem_proof
 from rwens.models.base import FormalProver

@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Union, Optional
 
 from rwens.models.llm.conf.types import LLMConfig
-from rwens.canonicalization.conf.types import CanonicalizationConfig
+from rwens.rewriting.conf.types import CanonicalizationConfig
 
 GOAL_TIMEOUT_SECONDS = 90.0
 

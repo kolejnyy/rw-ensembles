@@ -5,7 +5,7 @@ This document describes configuration arguments for `RewritingCanonicalization` 
 - `CanonicalLLMProver`
 - `EnsembleLLMProver`
 
-The module class is `RewritingCanonicalizationModule` (`rwens/canonicalization/rewriting.py`), and YAML is parsed through canonicalization config factories (`rwens/canonicalization/conf/*`).
+The module class is `RewritingCanonicalizationModule` (`rwens/rewriting/module.py`), and YAML is parsed through `rwens/rewriting/conf/*`.
 
 ## YAML shape
 

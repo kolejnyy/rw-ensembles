@@ -18,7 +18,7 @@ from rwens.models.conf.types import (
 )
 from rwens.models.base import FormalProver
 from rwens.models.llm.conf import dict_to_config as llm_dict_to_config, llm_from_config
-from rwens.canonicalization.conf import (
+from rwens.rewriting.conf import (
     dict_to_config as canonicalization_dict_to_config,
     canonicalization_from_config,
 )

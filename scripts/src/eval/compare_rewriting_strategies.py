@@ -24,11 +24,11 @@ from pathlib import Path
 
 import yaml
 
-from rwens.canonicalization.conf import dict_to_config as canonicalization_dict_to_config
-from rwens.canonicalization.conf import canonicalization_from_config
-from rwens.canonicalization.rewrites import make_theorem_surprise_energy
-from rwens.canonicalization.rewrites import get_states_cache_key
-from rwens.canonicalization.utils import ensure_rewrites_import
+from rwens.rewriting.conf import dict_to_config as canonicalization_dict_to_config
+from rwens.rewriting.conf import canonicalization_from_config
+from rwens.rewriting.rewrites import make_theorem_surprise_energy
+from rwens.rewriting.rewrites import get_states_cache_key
+from rwens.rewriting.utils import ensure_rewrites_import
 from rwens.dataset.utils import split_declarations_theorem_proof
 from rwens.utils.cache_paths import get_rw_cache_dir
 from rwens.models.llm.conf import dict_to_config as llm_dict_to_config

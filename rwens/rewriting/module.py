@@ -17,8 +17,8 @@ import time
 from pathlib import Path
 from typing import Any, Callable, List, Optional, Tuple
 
-from rwens.canonicalization.base import SimpleCanonicalizationModule
-from rwens.canonicalization.rewrites import (
+from rwens.rewriting.base import SimpleCanonicalizationModule
+from rwens.rewriting.rewrites import (
     GetStatesCacheEntry,
     StateCandidate,
     cache_config_tag_from_energy,
@@ -31,12 +31,12 @@ from rwens.canonicalization.rewrites import (
     save_get_states_entry,
     save_rewrites_cache,
 )
-from rwens.canonicalization.rewrites.cache import RewriteEntry
+from rwens.rewriting.rewrites.cache import RewriteEntry
 
 # Type for the rewrites dict used in the pipeline (hyp name -> list of rewrite entries).
 RewritesMap = dict[str, list[RewriteEntry]]
 from rwens.utils.cache_paths import get_rw_cache_dir
-from rwens.canonicalization.utils import (
+from rwens.rewriting.utils import (
     GOAL_REWRITE_KEY,
     build_fully_augmented_goal_from_best_types,
     build_states_for_goal,
@@ -148,7 +148,7 @@ class RewritingCanonicalizationModule(SimpleCanonicalizationModule):
         if reranking_heuristic is None:
             raise ValueError(
                 "RewritingCanonicalizationModule requires reranking_heuristic; "
-                "set canonicalization.reranking in config (e.g. { type: 'shortest_states' })."
+                "set rewriting.reranking in config (e.g. { type: 'shortest_states' })."
             )
         self._reranking_heuristic = reranking_heuristic
         # When None: no LLM scoring; pick top reranked candidate only; no fully-augmented candidate.
@@ -508,7 +508,7 @@ class RewritingCanonicalizationModule(SimpleCanonicalizationModule):
     def _get_state_after_try_tactic(self, tactic: str) -> Optional[str]:
         """
         Append "try X at *" at proof start, retrieve state, then remove the line.
-        Same pattern as SimpModule. Returns the state string or None if fetch fails.
+        Uses an ephemeral Lean session and goal fetch. Returns the state string or None if fetch fails.
         """
         if self._applier is None or self._cached_state is None:
             self._applier = self._applier or TacticApplier(

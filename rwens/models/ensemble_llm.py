@@ -15,7 +15,7 @@ import random
 from pathlib import Path
 from typing import Any, List, Optional, Tuple
 
-from rwens.canonicalization.rewrites import (
+from rwens.rewriting.rewrites import (
     make_single_pass_confidence_energy,
     make_theorem_surprise_energy,
 )

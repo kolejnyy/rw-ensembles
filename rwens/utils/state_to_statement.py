@@ -11,12 +11,9 @@ a problem statement so a single-pass LLM can be run on it for energy scoring.
 
 import re
 from pathlib import Path
-from typing import Optional, TYPE_CHECKING
+from typing import Optional
 
 from rwens.dataset.utils import split_declarations_theorem_proof
-
-if TYPE_CHECKING:
-    from rwens.canonicalization.identity import IdentityModule
 
 
 class StateProblemConverter:
@@ -111,11 +108,10 @@ class StateProblemConverter:
         project_root: str | Path,
         timeout_seconds: float = 120.0,
     ) -> None:
-        # Lazy import avoids canonicalization package import cycles when callers
-        # only use state-to-problem conversion helpers.
-        from rwens.canonicalization.identity import IdentityModule
+        # Lazy import avoids pulling rewriting internals when only helpers are needed.
+        from rwens.utils.plain_lean_session import PlainLeanSession
 
-        self._module = IdentityModule(
+        self._module = PlainLeanSession(
             project_root=str(project_root),
             timeout_seconds=timeout_seconds,
         )
