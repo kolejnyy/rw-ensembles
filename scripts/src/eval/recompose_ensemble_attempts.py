@@ -22,8 +22,8 @@ import shutil
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from invpro.dataset.utils import split_declarations_theorem_proof
-from invpro.models.ensemble_llm import EnsembleLLMProver
+from rwens.dataset.utils import split_declarations_theorem_proof
+from rwens.models.ensemble_llm import EnsembleLLMProver
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

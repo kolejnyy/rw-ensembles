@@ -4,10 +4,10 @@ Rebuild selected rows in ``rewrites_dataset.jsonl`` from on-disk ``generated/`` 
 
 For each problem name, reads ``<generated-root>/<dataset>/<split>/<problem>`` (same layout as
 ``generate_rewrites_openai``), extracts theorem blocks, and emits records compatible with
-:func:`~invpro.dataset.rewriting.jsonl_records.make_rewrite_dataset_record`.  Replaces the
+:func:`~rwens.dataset.rewriting.jsonl_records.make_rewrite_dataset_record`.  Replaces the
 contiguous block of lines for that ``original_name`` while preserving global JSONL order.
 
-See :mod:`invpro.dataset.rewriting.sync_rewrites_from_generated` for the library functions.
+See :mod:`rwens.dataset.rewriting.sync_rewrites_from_generated` for the library functions.
 """
 
 from __future__ import annotations
@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from invpro.dataset.rewriting.sync_rewrites_from_generated import (
+from rwens.dataset.rewriting.sync_rewrites_from_generated import (
     load_benchmark_index,
     load_jsonl,
     merge_rewrites_jsonl,

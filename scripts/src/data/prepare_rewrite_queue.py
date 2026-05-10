@@ -29,8 +29,8 @@ from typing import Any
 
 import yaml
 
-from invpro.prompt.conf import dict_to_config as prompt_dict_to_config
-from invpro.prompt.conf import prompt_formatter_from_config
+from rwens.prompt.conf import dict_to_config as prompt_dict_to_config
+from rwens.prompt.conf import prompt_formatter_from_config
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_MINIF2F_DATASET = PROJECT_ROOT / "data" / "minif2f.jsonl"

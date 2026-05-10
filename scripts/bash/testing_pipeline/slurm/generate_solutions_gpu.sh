@@ -9,9 +9,9 @@
 #SBATCH --error=.slurm/pipeline/%x_%j.err
 
 set -euo pipefail
-INVPRO_PYTHON="${INVPRO_PYTHON:-/path/to/conda/env/bin/python}"
+RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
 if [[ -z "${REPO_ROOT:-}" ]]; then
-  echo "REPO_ROOT must be set to the invpro repository root." >&2
+  echo "REPO_ROOT must be set to the rwens repository root." >&2
   exit 1
 fi
 cd "${REPO_ROOT}"
@@ -23,4 +23,4 @@ gen_extra=()
 if [[ -n "${GEN_EXPERIMENT_ID:-}" ]]; then
   gen_extra+=(--experiment-id "${GEN_EXPERIMENT_ID}")
 fi
-"${INVPRO_PYTHON}" scripts/src/eval/generate_solutions.py --config "${GEN_CONFIG}" "${gen_extra[@]}"
+"${RWENS_PYTHON}" scripts/src/eval/generate_solutions.py --config "${GEN_CONFIG}" "${gen_extra[@]}"

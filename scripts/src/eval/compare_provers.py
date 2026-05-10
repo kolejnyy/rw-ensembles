@@ -31,8 +31,8 @@ _project_root = Path(__file__).resolve().parents[2]
 if str(_project_root) not in __import__("sys").path:
     __import__("sys").path.insert(0, str(_project_root))
 
-from invpro.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
-from invpro.utils.metrics import pass_at_k
+from rwens.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
+from rwens.utils.metrics import pass_at_k
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -76,8 +76,8 @@ def build_problem_statement(problem: Dict[str, Any]) -> str:
     header = problem.get("header", "")
     stmt = problem.get("formal_statement", "")
     text = (header + stmt).replace("import Aesop\n", "")
-    if "invpro.lean.Rewrites" not in text:
-        text = text.replace("import Mathlib\n", "import Mathlib\nimport invpro.lean.Rewrites\n", 1)
+    if "rwens.lean.Rewrites" not in text:
+        text = text.replace("import Mathlib\n", "import Mathlib\nimport rwens.lean.Rewrites\n", 1)
     return text
 
 

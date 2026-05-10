@@ -8,9 +8,9 @@
 #SBATCH --error=.slurm/pipeline/%x_%A_%a.err
 
 set -euo pipefail
-INVPRO_PYTHON="${INVPRO_PYTHON:-/path/to/conda/env/bin/python}"
+RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
 if [[ -z "${REPO_ROOT:-}" ]]; then
-  echo "REPO_ROOT must be set to the invpro repository root." >&2
+  echo "REPO_ROOT must be set to the rwens repository root." >&2
   exit 1
 fi
 cd "${REPO_ROOT}"
@@ -35,7 +35,7 @@ fi
 if [[ -n "${VERIFY_PROBLEM_LIST_FILE:-}" ]]; then
   extra+=(--problem-list-file "${VERIFY_PROBLEM_LIST_FILE}")
 fi
-"${INVPRO_PYTHON}" scripts/src/testing_pipeline/verify_solutions_one_problem_mp.py "${SOLUTIONS_DIR}" \
+"${RWENS_PYTHON}" scripts/src/testing_pipeline/verify_solutions_one_problem_mp.py "${SOLUTIONS_DIR}" \
   --problem-index "${PROBLEM_INDEX}" \
   --num-workers "${WORKERS}" \
   --timeout-seconds "${TIMEOUT}" \

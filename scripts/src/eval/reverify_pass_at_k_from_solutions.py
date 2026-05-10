@@ -8,7 +8,7 @@ Expected directory structure:
       attempts.jsonl   # one JSON object per attempt, must include `final_code`
 
 For every problem:
-  - verify every `final_code` in attempts.jsonl using `invpro.utils.verifier.ProofVerifier`
+  - verify every `final_code` in attempts.jsonl using `rwens.utils.verifier.ProofVerifier`
   - compute per-problem PASS@k from the verified success booleans
 
 Progress reporting:
@@ -44,12 +44,12 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parents[2]
 
 # Allow running the script from arbitrary working directories when
-# `invpro` isn't installed as a site-package.
+# `rwens` isn't installed as a site-package.
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from invpro.utils.metrics import pass_at_k
-from invpro.utils.verifier import ProofVerifier
+from rwens.utils.metrics import pass_at_k
+from rwens.utils.verifier import ProofVerifier
 
 
 _WORKER_VERIFIER: Optional[ProofVerifier] = None

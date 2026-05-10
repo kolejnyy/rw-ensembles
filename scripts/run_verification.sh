@@ -13,5 +13,5 @@ fi
 SOLUTIONS_DIR="$1"
 shift
 
-INVPRO_PYTHON="${INVPRO_PYTHON:-/path/to/conda/env/bin/python}"
-"${INVPRO_PYTHON}" scripts/src/testing_pipeline/submit_verification_array.py "${SOLUTIONS_DIR}" "$@"
+RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
+"${RWENS_PYTHON}" scripts/src/testing_pipeline/submit_verification_array.py "${SOLUTIONS_DIR}" "$@"

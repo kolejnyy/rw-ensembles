@@ -29,20 +29,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from invpro.dataset.rewriting.jsonl_records import (
+from rwens.dataset.rewriting.jsonl_records import (
     empty_maps_to_none,
     make_rewrite_dataset_record,
     sanitize_header_remove_aesop,
     truncate_theorem_after_by,
 )
-from invpro.dataset.rewriting.parse_generated_variants import (
+from rwens.dataset.rewriting.parse_generated_variants import (
     extract_theorem_blocks,
     filter_variant_blocks,
     theorem_declared_name,
     variant_tag_from_declared_name,
 )
-from invpro.models.llm.openai_gpt import OpenAIGPTLLM, OpenAIUsage
-from invpro.prompt.variant_renaming import (
+from rwens.models.llm.openai_gpt import OpenAIGPTLLM, OpenAIUsage
+from rwens.prompt.variant_renaming import (
     VariantRenamingPromptFormatter,
     parse_variant_renaming_response,
 )

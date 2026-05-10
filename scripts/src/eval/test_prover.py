@@ -25,8 +25,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from invpro.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
-from invpro.utils.metrics import pass_at_k
+from rwens.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
+from rwens.utils.metrics import pass_at_k
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

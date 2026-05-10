@@ -10,9 +10,9 @@
 
 set -euo pipefail
 
-INVPRO_PYTHON="${INVPRO_PYTHON:-/path/to/conda/env/bin/python}"
+RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
 if [[ -z "${REPO_ROOT:-}" ]]; then
-  echo "REPO_ROOT must be set to the invpro repository root." >&2
+  echo "REPO_ROOT must be set to the rwens repository root." >&2
   exit 1
 fi
 cd "${REPO_ROOT}"
@@ -33,4 +33,4 @@ if [[ "${ORCH_NO_MERGE:-0}" == "1" ]]; then
   args+=(--no-merge)
 fi
 
-"${INVPRO_PYTHON}" scripts/src/testing_pipeline/orchestrate_generate_and_reverify_slurm.py "${args[@]}"
+"${RWENS_PYTHON}" scripts/src/testing_pipeline/orchestrate_generate_and_reverify_slurm.py "${args[@]}"

@@ -1,8 +1,8 @@
-"""Tests for invpro.utils.lean_proof_text."""
+"""Tests for rwens.utils.lean_proof_text."""
 
 from __future__ import annotations
 
-from invpro.utils.lean_proof_text import normalize_proof_indent
+from rwens.utils.lean_proof_text import normalize_proof_indent
 
 
 def test_normalize_proof_indent_preserves_nested_blocks() -> None:

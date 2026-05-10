@@ -32,7 +32,7 @@ from typing import Dict, List
 
 import yaml
 
-from invpro.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
+from rwens.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

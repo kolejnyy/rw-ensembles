@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from invpro.dataset.rewriting.jsonl_records import (
+from rwens.dataset.rewriting.jsonl_records import (
     make_rewrite_dataset_record,
     normalize_formal_statement,
     sanitize_header_remove_aesop,

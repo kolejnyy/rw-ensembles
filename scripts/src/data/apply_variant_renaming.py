@@ -15,9 +15,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from invpro.dataset.rewriting.jsonl_records import empty_maps_to_none, normalize_formal_statement
-from invpro.models.llm.openai_gpt import OpenAIGPTLLM
-from invpro.prompt.variant_renaming import (
+from rwens.dataset.rewriting.jsonl_records import empty_maps_to_none, normalize_formal_statement
+from rwens.models.llm.openai_gpt import OpenAIGPTLLM
+from rwens.prompt.variant_renaming import (
     VariantRenamingPromptFormatter,
     parse_variant_renaming_response,
 )

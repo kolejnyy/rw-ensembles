@@ -11,8 +11,8 @@ from pathlib import Path
 _project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_project_root))
 
-from invpro.dataset.utils import split_declarations_theorem_proof
-from invpro.utils.state_to_statement import StateProblemConverter
+from rwens.dataset.utils import split_declarations_theorem_proof
+from rwens.utils.state_to_statement import StateProblemConverter
 
 
 def main() -> int:

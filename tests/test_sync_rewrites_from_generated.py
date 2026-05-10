@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from invpro.dataset.rewriting.sync_rewrites_from_generated import (
+from rwens.dataset.rewriting.sync_rewrites_from_generated import (
     build_records_for_problem,
     merge_rewrites_jsonl,
 )

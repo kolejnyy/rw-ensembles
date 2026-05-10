@@ -7,14 +7,14 @@ from __future__ import annotations
 
 import pytest
 
-from invpro.canonicalization.rewrites import (
+from rwens.canonicalization.rewrites import (
     filter_rewrites_by_namespace,
     get_reranking_heuristic,
     rerank_top_k_complexity_depth,
     rerank_top_k_shortest_states,
 )
-from invpro.canonicalization.rewrites.cache import RewriteEntry
-from invpro.canonicalization.rewrites.filters import (
+from rwens.canonicalization.rewrites.cache import RewriteEntry
+from rwens.canonicalization.rewrites.filters import (
     lemma_namespaces_from_tactic,
     namespaces_from_premise,
 )

@@ -17,8 +17,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-from invpro.utils.metrics import equivalence_certificate_diagnostics_acceptable
-from invpro.utils.verifier import ProofVerifier
+from rwens.utils.metrics import equivalence_certificate_diagnostics_acceptable
+from rwens.utils.verifier import ProofVerifier
 
 
 def _repo_root() -> Path:

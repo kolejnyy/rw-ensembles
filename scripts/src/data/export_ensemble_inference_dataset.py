@@ -33,9 +33,9 @@ from typing import Any, Dict, List, Optional
 import yaml
 from tqdm import tqdm
 
-from invpro.dataset.utils import split_declarations_theorem_proof
-from invpro.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
-from invpro.models.ensemble_llm import EnsembleLLMProver
+from rwens.dataset.utils import split_declarations_theorem_proof
+from rwens.models.conf import dict_to_config as prover_dict_to_config, prover_from_config
+from rwens.models.ensemble_llm import EnsembleLLMProver
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

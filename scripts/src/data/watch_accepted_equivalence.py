@@ -1,8 +1,8 @@
 """
-Poll a manual-review ``accepted/`` tree and run :class:`~invpro.equivalence.checker.EquivalenceChecker`
+Poll a manual-review ``accepted/`` tree and run :class:`~rwens.equivalence.checker.EquivalenceChecker`
 on each new variant ``*.lean`` file (skipping ``original.lean``).
 
-Expected layout (same as :mod:`invpro.dataset.rewriting.manual_review`)::
+Expected layout (same as :mod:`rwens.dataset.rewriting.manual_review`)::
 
     {output_root}/{run_id}/accepted/{dataset}/{split}/{problem}/{variant}.lean
 
@@ -26,10 +26,10 @@ from pathlib import Path
 from typing import Any
 
 import yaml
-from invpro.equivalence.certificate import compose_rwdata_bridge_proof_lines
-from invpro.utils.lean_preamble import sanitize_preamble_remove_aesop
-from invpro.utils.lean_proof_text import normalize_proof_indent, theorem_header_through_by, theorem_with_sorry
-from invpro.utils.statement_parser import parse_theorem_through_by
+from rwens.equivalence.certificate import compose_rwdata_bridge_proof_lines
+from rwens.utils.lean_preamble import sanitize_preamble_remove_aesop
+from rwens.utils.lean_proof_text import normalize_proof_indent, theorem_header_through_by, theorem_with_sorry
+from rwens.utils.statement_parser import parse_theorem_through_by
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
@@ -65,10 +65,10 @@ def _load_rewrites_index(jsonl_path: Path) -> dict[tuple[str, str, str, str], di
 
 
 def _load_single_pass_prover(yaml_path: Path, project_root: Path):
-    from invpro.models.conf import dict_to_config as prover_dict_to_config
-    from invpro.models.conf import prover_from_config
-    from invpro.models.conf.types import SinglePassProverConfig
-    from invpro.models.single_pass_prover import SinglePassProver
+    from rwens.models.conf import dict_to_config as prover_dict_to_config
+    from rwens.models.conf import prover_from_config
+    from rwens.models.conf.types import SinglePassProverConfig
+    from rwens.models.single_pass_prover import SinglePassProver
 
     with yaml_path.open(encoding="utf-8") as f:
         cfg_dict = yaml.safe_load(f) or {}
@@ -300,7 +300,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Failed to load SinglePassProver: {ex}", file=sys.stderr)
             return 1
 
-    from invpro.equivalence import EquivalenceCertificateStatus, EquivalenceChecker
+    from rwens.equivalence import EquivalenceCertificateStatus, EquivalenceChecker
 
     checker = EquivalenceChecker(single_pass_prover=single_pass)
 

@@ -12,7 +12,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from invpro.equivalence import (
+from rwens.equivalence import (
     AuxiliaryGoalKind,
     AuxiliaryVerificationResult,
     EquivalenceCertificateStatus,
@@ -22,7 +22,7 @@ from invpro.equivalence import (
     append_tactics_block,
     build_equivalence_certificate_lean,
 )
-from invpro.utils.metrics import equivalence_certificate_diagnostics_acceptable
+from rwens.utils.metrics import equivalence_certificate_diagnostics_acceptable
 
 # --- RWData.md — 50×20 example (amc12_2000_p5 vs v11) ---------------------------------
 
@@ -159,7 +159,7 @@ def test_verify_auxiliary_goals_one_tactic_per_goal_when_verify_succeeds() -> No
         original_theorem=ORIGINAL_AMC12_2000_P5,
         variant_theorem=VARIANT_AMC12_2000_P5_V11,
     )
-    with patch("invpro.equivalence.checker.ProofVerifier") as MockV:
+    with patch("rwens.equivalence.checker.ProofVerifier") as MockV:
         inst = MockV.return_value
         inst.verify.return_value = (True, None)
 
@@ -181,7 +181,7 @@ def test_check_equivalence_uses_single_verifier_for_all_goals() -> None:
         original_theorem=ORIGINAL_AMC12_2000_P5,
         variant_theorem=VARIANT_AMC12_2000_P5_V11,
     )
-    with patch("invpro.equivalence.checker.ProofVerifier") as MockV:
+    with patch("rwens.equivalence.checker.ProofVerifier") as MockV:
         inst = MockV.return_value
         inst.verify.return_value = (True, None)
 
@@ -211,7 +211,7 @@ def test_check_equivalence_amc12_v3() -> None:
         original_theorem=ORIGINAL_AMC12_2000_P5,
         variant_theorem=VARIANT_AMC12_2000_P5_V3,
     )
-    with patch("invpro.equivalence.checker.ProofVerifier") as MockV:
+    with patch("rwens.equivalence.checker.ProofVerifier") as MockV:
         inst = MockV.return_value
         inst.verify.return_value = (True, None)
 
@@ -238,7 +238,7 @@ def test_verify_auxiliary_goals_skips_verifier_constructor_when_given() -> None:
         original_theorem=ORIGINAL_AMC12_2000_P5,
         variant_theorem=VARIANT_AMC12_2000_P5_V11,
     )
-    with patch("invpro.equivalence.checker.ProofVerifier") as MockV:
+    with patch("rwens.equivalence.checker.ProofVerifier") as MockV:
         v = MagicMock()
         v.verify.return_value = (True, None)
         EquivalenceChecker().verify_auxiliary_goals(
@@ -345,8 +345,8 @@ def test_build_equivalence_certificate_renamed_variant_uses_bridge_variant() -> 
 
 
 @pytest.mark.skipif(
-    not os.environ.get("INVPRO_RUN_LEAN_VERIFY"),
-    reason="Set INVPRO_RUN_LEAN_VERIFY=1 to run ProofVerifier + LSP (slow; needs lake project).",
+    not os.environ.get("RWENS_RUN_LEAN_VERIFY"),
+    reason="Set RWENS_RUN_LEAN_VERIFY=1 to run ProofVerifier + LSP (slow; needs lake project).",
 )
 def test_verify_auxiliary_goals_rwdata_amc12_real_lean() -> None:
     """End-to-end check for ``.todo/RWData.md`` lines 38–41: tactics close all three goals."""
@@ -365,8 +365,8 @@ def test_verify_auxiliary_goals_rwdata_amc12_real_lean() -> None:
 
 
 @pytest.mark.skipif(
-    not os.environ.get("INVPRO_RUN_LEAN_VERIFY"),
-    reason="Set INVPRO_RUN_LEAN_VERIFY=1 to run ProofVerifier + LSP (slow; needs lake project).",
+    not os.environ.get("RWENS_RUN_LEAN_VERIFY"),
+    reason="Set RWENS_RUN_LEAN_VERIFY=1 to run ProofVerifier + LSP (slow; needs lake project).",
 )
 def test_check_equivalence_amc12_v3_real_lean() -> None:
     """Default ``try`` tactic block closes all bridge goals for original vs ``amc12_2000_p5_v3``."""

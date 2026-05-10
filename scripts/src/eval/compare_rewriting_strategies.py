@@ -24,18 +24,18 @@ from pathlib import Path
 
 import yaml
 
-from invpro.canonicalization.conf import dict_to_config as canonicalization_dict_to_config
-from invpro.canonicalization.conf import canonicalization_from_config
-from invpro.canonicalization.rewrites import make_theorem_surprise_energy
-from invpro.canonicalization.rewrites import get_states_cache_key
-from invpro.canonicalization.utils import ensure_rewrites_import
-from invpro.dataset.utils import split_declarations_theorem_proof
-from invpro.utils.cache_paths import get_rw_cache_dir
-from invpro.models.llm.conf import dict_to_config as llm_dict_to_config
-from invpro.models.llm.conf import llm_from_config
-from invpro.prompt.conf import dict_to_config as prompt_dict_to_config
-from invpro.prompt.conf import prompt_formatter_from_config
-from invpro.utils.state_to_statement import StateProblemConverter, extract_theorem_name
+from rwens.canonicalization.conf import dict_to_config as canonicalization_dict_to_config
+from rwens.canonicalization.conf import canonicalization_from_config
+from rwens.canonicalization.rewrites import make_theorem_surprise_energy
+from rwens.canonicalization.rewrites import get_states_cache_key
+from rwens.canonicalization.utils import ensure_rewrites_import
+from rwens.dataset.utils import split_declarations_theorem_proof
+from rwens.utils.cache_paths import get_rw_cache_dir
+from rwens.models.llm.conf import dict_to_config as llm_dict_to_config
+from rwens.models.llm.conf import llm_from_config
+from rwens.prompt.conf import dict_to_config as prompt_dict_to_config
+from rwens.prompt.conf import prompt_formatter_from_config
+from rwens.utils.state_to_statement import StateProblemConverter, extract_theorem_name
 
 
 def _state_to_theorem_statement(decls: str, state_str: str | None, theorem_name: str | None) -> str | None:

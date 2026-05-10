@@ -8,7 +8,7 @@
 #   ./scripts/switch_lean_version.sh 4.15.0      # switch back to current
 #   ./scripts/switch_lean_version.sh             # show current version and usage
 #
-# Run from the invpro project root.
+# Run from the rwens project root.
 
 set -e
 
@@ -80,7 +80,7 @@ switch_to() {
     cp "$env_dir/lean-toolchain" lean-toolchain
     cp "$env_dir/lakefile.lean" lakefile.lean
     if [[ -f "$env_dir/Rewrites.lean" ]]; then
-        cp "$env_dir/Rewrites.lean" invpro/lean/Rewrites.lean
+        cp "$env_dir/Rewrites.lean" rwens/lean/Rewrites.lean
         echo "Installed Rewrites.lean for $target"
     fi
     echo "Installed lean-toolchain and lakefile.lean for $target"

@@ -3,12 +3,12 @@
 # stages 1–2 submit GPU jobs; stages 3–5 run on this allocation (recompose, verify submit, analysis).
 #
 # Submit from anywhere:
-#   sbatch /path/to/invpro/scripts/bash/slurm/ensemble_eval_orchestrator.slurm
+#   sbatch /path/to/rwens/scripts/bash/slurm/ensemble_eval_orchestrator.slurm
 # Or from repo root:
 #   sbatch scripts/bash/slurm/ensemble_eval_orchestrator.slurm
 #
 # Override repo location if needed:
-#   export REPO_ROOT=/path/to/invpro
+#   export REPO_ROOT=/path/to/rwens
 #   sbatch scripts/bash/slurm/ensemble_eval_orchestrator.slurm
 #
 #SBATCH --job-name=ens-orch

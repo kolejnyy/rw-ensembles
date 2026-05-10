@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from invpro.prompt.variant_renaming import parse_variant_renaming_response
+from rwens.prompt.variant_renaming import parse_variant_renaming_response
 
 
 def test_parse_variant_renaming_plain_json() -> None:

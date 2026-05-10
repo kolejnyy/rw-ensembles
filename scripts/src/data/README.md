@@ -53,7 +53,7 @@ RUN_ID/
 ## 1) Create Queue
 
 Script: `prepare_rewrite_queue.py`  
-Module: `invpro.dataset.rewriting.prepare_queue`
+Module: `rwens.dataset.rewriting.prepare_queue`
 
 Reads:
 - benchmark dataset JSONL (default `data/minif2f.jsonl`)
@@ -85,7 +85,7 @@ python scripts/src/data/prepare_rewrite_queue.py \
 ## 2) Run OpenAI Augmentations
 
 Script: `generate_rewrites_openai.py`  
-Module: `invpro.dataset.rewriting.generate_openai`
+Module: `rwens.dataset.rewriting.generate_openai`
 
 Reads:
 - queue JSONL
@@ -117,7 +117,7 @@ python scripts/src/data/generate_rewrites_openai.py \
 ## 3) Start Manual Verification (Accept/Reject)
 
 Script: `manual_review_rewrites.py`  
-Module: `invpro.dataset.rewriting.manual_review`
+Module: `rwens.dataset.rewriting.manual_review`
 
 Reads:
 - either generated files (`generated/...`) or `--rewrites-jsonl`
@@ -149,7 +149,7 @@ python scripts/src/data/manual_review_rewrites.py \
 ## 4) Start Background Checker (LLM Prover ON)
 
 Script: `watch_accepted_equivalence.py`  
-Module: `invpro.dataset.rewriting.watch_accepted_equivalence`
+Module: `rwens.dataset.rewriting.watch_accepted_equivalence`
 
 Reads:
 - accepted variants in `accepted/...`
@@ -197,7 +197,7 @@ python scripts/src/data/watch_accepted_equivalence.py \
 ## 5) Merge Manually Corrected Certificates
 
 Script: `apply_corrected_certificates.py`  
-Module: `invpro.dataset.rewriting.apply_corrected_certificates`
+Module: `rwens.dataset.rewriting.apply_corrected_certificates`
 
 Reads:
 - corrected files from `<run_root>/corrected/**`
@@ -235,7 +235,7 @@ python scripts/src/data/apply_corrected_certificates.py \
 ## 6) Build Confirmed Dataset
 
 Script: `build_confirmed_rewrites_dataset.py`  
-Module: `invpro.dataset.rewriting.build_confirmed_rewrites_dataset`
+Module: `rwens.dataset.rewriting.build_confirmed_rewrites_dataset`
 
 Reads:
 - `rewrites_dataset.jsonl`

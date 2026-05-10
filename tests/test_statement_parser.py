@@ -1,8 +1,8 @@
-"""Tests for invpro.utils.statement_parser.StatementParser."""
+"""Tests for rwens.utils.statement_parser.StatementParser."""
 
 from __future__ import annotations
 
-from invpro.utils.statement_parser import (
+from rwens.utils.statement_parser import (
     BinderRole,
     StatementParser,
     parse_theorem_through_by,

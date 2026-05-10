@@ -7,7 +7,7 @@ processes one file, runs its own Lean LSP client, prints a JSON result, and
 exits. The manager enforces per-file timeouts and kills the process group
 on hang.
 
-Workers are implemented in invpro.dataset.generate_augmented.
+Workers are implemented in rwens.dataset.generate_augmented.
 
 Run with:
   conda run -n invpro python scripts/generate_augmented_dataset.py --file-workers 4 --out-dir .augmented_dataset
@@ -27,12 +27,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from invpro.dataset.generate_augmented import (
+from rwens.dataset.generate_augmented import (
     _infer_uuid_from_path,
     _output_dir_exists,
 )
 
-WORKER_MODULE = "invpro.dataset.generate_augmented"
+WORKER_MODULE = "rwens.dataset.generate_augmented"
 DEFAULT_WORKER_TIMEOUT = 600
 
 

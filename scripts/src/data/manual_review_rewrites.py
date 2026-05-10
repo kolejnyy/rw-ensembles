@@ -23,7 +23,7 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
-from invpro.dataset.rewriting import extract_theorem_blocks, theorem_declared_name
+from rwens.dataset.rewriting import extract_theorem_blocks, theorem_declared_name
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUTPUT_ROOT = PROJECT_ROOT / "data" / "rewritings_pipeline"

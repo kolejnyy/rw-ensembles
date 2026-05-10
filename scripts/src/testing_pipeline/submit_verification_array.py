@@ -39,7 +39,7 @@ def _submit_sbatch(
     array_spec: str,
     output_pattern: str,
     error_pattern: str,
-    invpro_python: str | None,
+    rwens_python: str | None,
     problem_index_offset: int,
     dependency_after_job_id: str | None,
     dependency_type: str,
@@ -50,8 +50,8 @@ def _submit_sbatch(
         exports.append(f"VERIFY_PROBLEM_INDEX_OFFSET={problem_index_offset}")
     if problem_list_file is not None:
         exports.append(f"VERIFY_PROBLEM_LIST_FILE={problem_list_file}")
-    if invpro_python:
-        exports.append(f"INVPRO_PYTHON={invpro_python}")
+    if rwens_python:
+        exports.append(f"RWENS_PYTHON={rwens_python}")
     cmd = [
         "sbatch",
         "--parsable",
@@ -138,7 +138,7 @@ def main() -> int:
         ),
     )
     parser.add_argument("--log-tag", type=str, default=None)
-    parser.add_argument("--invpro-python", type=str, default=None)
+    parser.add_argument("--rwens-python", type=str, default=None)
     parser.add_argument(
         "--wait",
         action="store_true",
@@ -196,7 +196,7 @@ def main() -> int:
             array_spec=array_spec,
             output_pattern=str(log_dir / "%x_%A_%a.out"),
             error_pattern=str(log_dir / "%x_%A_%a.err"),
-            invpro_python=args.invpro_python,
+            rwens_python=args.rwens_python,
             problem_index_offset=offset,
             dependency_after_job_id=prev_job_id if use_dep else None,
             dependency_type=args.chunk_dependency,
