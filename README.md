@@ -4,115 +4,63 @@ A research project on proof-invariant formal provers in Lean4.
 
 ## Installation
 
+Start by creating a Python 3.10 env
+```bash
+conda create -n rwens python=3.10
+conda activate rwens
+```
+Then, install torch appropriately for your device. The project was originally run with torch `2.9.1+cu128`.
+```bash
+pip install torch==2.9.1 torchvision==0.24.1 torchaudio==2.9.1 --index-url https://download.pytorch.org/whl/cu128
+```
+
+Install the remaining requirements
+```bash
+pip install -r requirements.txt
+```
+
 Install the package in development mode:
 
 ```bash
 pip install -e .
 ```
 
-## Codebase overview
+## Running proof generation
 
-The codebase is organized into several key components:
-
-- **Configuration System** (`invpro/*/conf/`): YAML-based configuration for prompt formatters, LLM models, and formal provers. Supports hierarchical, nested configurations with type-safe factories.
-
-- **Formal Provers** (`invpro/models/`): Implements `FormalProver` interface with step-by-step proving capabilities. `NaiveStepByStepProver` uses LLMs to generate tactics iteratively, based on the current state.
-
-- **LLM Models** (`invpro/models/llm/`): Wrappers for language models (e.g., `QwenCoderS2T`) that generate tactics from proof states. Supports checkpoint loading and quantization.
-
-- **Tactic Application** (`invpro/utils/applier.py`): Manages indentation tracking and state updates after applying tactics to Lean proofs.
-
-- **Evaluation** (`scripts/src/eval/test_prover.py`, `invpro/utils/metrics.py`): Scripts and utilities for evaluating provers on datasets (e.g. miniF2F, ProofNet).
-
-## Testing (Slurm)
-
-This repository supports a two-stage Slurm workflow:
-1. generate solution attempts
-2. re-verify those attempts problem-by-problem (Slurm array, typically one at a time)
-
-The main entry points are `scripts/run_testing.sh` and `scripts/run_verification.sh`.
-
-### 1) End-to-end run (generation + reverification)
-
-Edit `scripts/run_testing.sh`:
-- set `REPO_ROOT`
-- set `ORCH_CONFIG` to a test config YAML (for example `configs/testing/adhoc.yaml`)
-- set `ORCH_EXPERIMENT_ID` (results/log namespace)
-
-Then run:
+Run this from the repository root on a machine with a CUDA GPU (interactive shell or an allocated GPU session). The example below uses the miniF2F valid split config bundled in this repo.
 
 ```bash
-bash scripts/run_testing.sh
+conda activate rwens
+python scripts/src/eval/generate_solutions.py --config configs/testing/miniF2F/minif2f-deepseek-single-pass-baseline.yaml
 ```
 
-What this does:
-- submits a driver job via `scripts/bash/testing_pipeline/slurm/run_orchestrate_pipeline.sh`
-- driver submits generation (`scripts/bash/testing_pipeline/slurm/generate_solutions_gpu.sh`)
-- after generation finishes, submits reverification array (`scripts/bash/testing_pipeline/slurm/verify_one_problem_array_adhoc.sh`) with one concurrent task by default
-- merges per-problem reverification outputs into a CSV
+The YAML points at a prover model config (`prover:`), dataset (`dataset_path`, `split`), sampling settings (`num_attempts`, `batch_size`), and an output namespace (`experiment_id`). With `minif2f-deepseek-single-pass-baseline.yaml`, outputs are written under:
 
-Expected outputs:
-- generated attempts: `results/<dataset_name>/<split>/<experiment_id>/<problem>/attempts.jsonl`
-- per-problem reverification JSONs: `results/<dataset_name>/<split>/<experiment_id>/.reverification_by_problem/*.json`
-- merged metrics: `results/<dataset_name>/<split>/<experiment_id>/reverified_pass_at_k.csv`
-- Slurm logs: `.slurm/pipeline/<experiment_id>/`
+`results/minif2f/valid/deepseek-miniF2F-valid-noncot/`
 
-### 2) Reverification-only for an existing solutions folder
+Each selected problem gets its own subdirectory containing `attempts.jsonl`. Adjust `limit`, `experiment_id`, or other fields in that YAML to change how many problems run and where results go.
 
-Use this when you already have `attempts.jsonl` files and only want verification.
+While the model loads you may see tokenizer messages about `rope_scaling` field types; they do not stop vLLM from starting once weights are loaded and CUDA graph capture finishes.
+
+## Verifying proofs on Slurm
+
+After generation has produced `attempts.jsonl` under each problem folder, submit reverification as Slurm array jobs from the repo root:
 
 ```bash
-bash scripts/run_verification.sh results/minif2f/valid/<experiment_id>
+bash scripts/run_verification.sh results/minif2f/valid/deepseek-miniF2F-valid-noncot
 ```
 
-This wraps `scripts/src/testing_pipeline/submit_verification_array.py`, which:
-- enumerates problem folders containing `attempts.jsonl` (lexicographic order)
-- skips already processed problems by default (`.reverification_by_problem/<problem>.json` exists); use `--no-skip-existing` to force full reruns
-- submits `scripts/bash/testing_pipeline/slurm/verify_one_problem_array_adhoc.sh` as one or more Slurm arrays (splits large runs so each job stays under typical `MaxArraySize` limits, default `--max-array-tasks 1000`)
-- by default **chains** those chunk jobs with `afterok` dependencies so only one chunk runs at a time (use `--parallel-chunks` on the Python script if you want every chunk submitted at once)
-- writes logs under `.slurm/pipeline/<solutions_folder_name>/` by default
-
-Common optional flags:
+The wrapper `cd`s into `REPO_ROOT` and runs `scripts/src/testing_pipeline/submit_verification_array.py`. By default `REPO_ROOT` is `/slurm-storage/krzole/rw-ens` and `RWENS_PYTHON` is `/slurm-storage/krzole/.conda/envs/rwens/bin/python`. On another host or layout, set them before invoking the script:
 
 ```bash
-bash scripts/run_verification.sh results/minif2f/valid/<experiment_id> \
-  --max-concurrent 4 \
-  --max-array-tasks 1000 \
-  --log-tag <custom_log_tag>
+export REPO_ROOT=/path/to/rw-ens
+export RWENS_PYTHON=/path/to/conda/envs/rwens/bin/python
+bash scripts/run_verification.sh results/minif2f/valid/deepseek-miniF2F-valid-noncot
 ```
 
-Forward `--parallel-chunks` through the wrapper (all extra args go to `submit_verification_array.py`) if you want every chunk job queued immediately instead of waiting for the previous chunk to finish.
-Use `--no-skip-existing` if you intentionally want to recompute problems that already have reverification JSON outputs.
+Slurm prints the submitted job id(s). Logs are typically under `.slurm/pipeline/<folder_name>/` (for example `.slurm/pipeline/deepseek-miniF2F-valid-noncot/` when the argument is the path shown above). Problems that already have reverification outputs are skipped unless you pass extra flags through to `submit_verification_array.py` (for example `--no-skip-existing`). Any arguments after the solutions directory are forwarded to that Python entrypoint.
 
-### Config notes
-
-The orchestration scripts read a testing YAML in the same style as `scripts/src/eval/generate_solutions.py`, e.g.:
-
-```yaml
-prover: configs/models/deepseek-single-pass-baseline-vllm.yaml
-dataset_path: data/minif2f.jsonl
-split: valid
-num_attempts: 8
-limit: 4
-start_from: 0
+You can increase the number of files processed simoultaneously by specifying the `max-concurrent` parameter:
+```bash
+bash scripts/run_verification.sh results/minif2f/valid/deepseek-miniF2F-valid-noncot --max-concurrent 4
 ```
-
-`dataset_name` is optional; if omitted, it defaults to the stem of `dataset_path`.
-
-## Scripts layout
-
-- Top-level callable scripts:
-  - `scripts/run_testing.sh`
-  - `scripts/run_verification.sh`
-  - `scripts/switch_lean_version.sh`
-- Supplementary bash scripts:
-  - `scripts/bash/testing_pipeline/slurm/` (active Slurm pipeline helpers)
-  - `scripts/bash/legacy_slurm/` (older ad-hoc Slurm scripts)
-  - `scripts/bash/utils/` (misc shell utilities)
-- Supplementary python scripts:
-  - `scripts/src/testing_pipeline/` (active generation/reverification pipeline logic)
-  - `scripts/src/eval/` (evaluation/generation/compare scripts)
-  - `scripts/src/analysis/` (analysis/report scripts)
-  - `scripts/src/debug/` (debug/smoke-test scripts)
-  - `scripts/src/data/` (dataset generation/prep scripts)
-  - `scripts/src/utils/` (small utility scripts)

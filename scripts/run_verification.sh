@@ -1,7 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO_ROOT="${REPO_ROOT:-/path/to/repo}"
 cd "${REPO_ROOT}"
 
 if [[ $# -lt 1 ]]; then
@@ -13,5 +12,4 @@ fi
 SOLUTIONS_DIR="$1"
 shift
 
-RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
 "${RWENS_PYTHON}" scripts/src/testing_pipeline/submit_verification_array.py "${SOLUTIONS_DIR}" "$@"

@@ -8,7 +8,6 @@
 #SBATCH --error=.slurm/pipeline/%x_%A_%a.err
 
 set -euo pipefail
-RWENS_PYTHON="${RWENS_PYTHON:-/path/to/conda/env/bin/python}"
 if [[ -z "${REPO_ROOT:-}" ]]; then
   echo "REPO_ROOT must be set to the rwens repository root." >&2
   exit 1
