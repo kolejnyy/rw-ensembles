@@ -18,4 +18,4 @@ tensorboard>=2.14.0
 pyyaml>=6.0.0
 
 # vLLM for faster LLM inference (optional; install with: pip install vllm)
-vllm>=0.6.0
+vllm>=0.6.0,<0.17
