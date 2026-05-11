@@ -1,8 +1,0 @@
-# CanonicalLLMProver on minif2f valid: 40 problems, 8 attempts each (limited run for quick testing)
-prover: configs/models/canonical-llm-prover-15-2-theorem-surprise.yaml
-
-dataset_path: data/minif2f.jsonl
-split: valid
-
-num_attempts: 4
-limit: 40

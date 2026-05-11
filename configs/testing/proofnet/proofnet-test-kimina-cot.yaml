@@ -1,0 +1,11 @@
+# Kimina-Prover-Distill-8B (step-by-step / CoT) on ProofNet test.
+prover: configs/models/kimina-distill.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: kimina-proofnet-test-cot
+
+num_attempts: 32
+batch_size: 16

@@ -1,0 +1,11 @@
+# Goedel-Prover-DPO (completion / non-CoT) on ineq-transformed test.
+prover: configs/models/goedel-dpo.yaml
+
+dataset_path: data/ineq-transformed.jsonl
+split: test
+
+dataset_name: ineq-transformed
+experiment_id: goedel-dpo-ineq-transformed-test-noncot
+
+num_attempts: 64
+batch_size: 64

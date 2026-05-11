@@ -1,0 +1,11 @@
+# Kimina-Prover-Distill-8B (step-by-step / CoT) on miniF2F-rw valid.
+prover: configs/models/kimina-distill-single-pass-vllm.yaml
+
+dataset_path: data/minif2f-rw.jsonl
+split: valid
+
+dataset_name: minif2f-rw
+experiment_id: kimina-miniF2F-rw-valid-cot
+
+num_attempts: 32
+batch_size: 16

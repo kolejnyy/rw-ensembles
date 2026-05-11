@@ -1,0 +1,11 @@
+# DeepSeek-Prover-V2 (non-CoT baseline) on ineq-seed test.
+prover: configs/models/deepseek-noncot.yaml
+
+dataset_path: data/ineq-seed.jsonl
+split: test
+
+dataset_name: ineq-seed
+experiment_id: deepseek-ineq-seed-test-noncot
+
+num_attempts: 64
+batch_size: 64

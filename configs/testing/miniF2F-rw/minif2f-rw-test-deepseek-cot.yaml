@@ -1,0 +1,11 @@
+# DeepSeek-Prover-V2 (CoT prompt) on miniF2F-rw test.
+prover: configs/models/deepseek-cot-single-pass-vllm.yaml
+
+dataset_path: data/minif2f-rw.jsonl
+split: test
+
+dataset_name: minif2f-rw
+experiment_id: deepseek-miniF2F-rw-test-cot
+
+num_attempts: 32
+batch_size: 16

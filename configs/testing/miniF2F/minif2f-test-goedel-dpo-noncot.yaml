@@ -1,0 +1,11 @@
+# Goedel-Prover-DPO (completion / non-CoT) on miniF2F test.
+prover: configs/models/goedel-dpo.yaml
+
+dataset_path: data/minif2f.jsonl
+split: test
+
+dataset_name: minif2f
+experiment_id: goedel-dpo-miniF2F-test-noncot
+
+num_attempts: 64
+batch_size: 64

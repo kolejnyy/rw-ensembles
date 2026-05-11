@@ -1,8 +1,0 @@
-# TODO run: DeepSeek non-CoT SinglePassProver on ProofNet test split.
-prover: configs/models/deepseek-single-pass-baseline-vllm.yaml
-
-dataset_path: data/proofnet.jsonl
-split: test
-
-num_attempts: 64
-batch_size: 16

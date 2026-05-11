@@ -1,8 +1,0 @@
-# Test EnsembleLLMProver on minif2f
-prover: configs/models/ensemble-vllm-prover-15-2-theorem-surprise.yaml
-
-dataset_path: data/minif2f.jsonl
-split: valid
-
-num_attempts: 128
-limit: 122

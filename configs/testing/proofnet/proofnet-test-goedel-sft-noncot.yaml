@@ -1,0 +1,11 @@
+# Goedel-Prover-SFT (completion / non-CoT) on ProofNet test.
+prover: configs/models/goedel-sft.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: goedel-sft-proofnet-test-noncot
+
+num_attempts: 64
+batch_size: 64

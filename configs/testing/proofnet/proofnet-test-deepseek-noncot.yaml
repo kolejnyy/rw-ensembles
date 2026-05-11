@@ -1,0 +1,11 @@
+# DeepSeek-Prover-V2 (non-CoT baseline) on ProofNet test.
+prover: configs/models/deepseek-noncot.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: deepseek-proofnet-test-noncot
+
+num_attempts: 64
+batch_size: 64

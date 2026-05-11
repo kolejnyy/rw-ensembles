@@ -1,0 +1,11 @@
+# DeepSeek-Prover-V2 (non-CoT baseline) on miniF2F test.
+prover: configs/models/deepseek-noncot.yaml
+
+dataset_path: data/minif2f.jsonl
+split: test
+
+dataset_name: minif2f
+experiment_id: deepseek-miniF2F-test-noncot
+
+num_attempts: 64
+batch_size: 64

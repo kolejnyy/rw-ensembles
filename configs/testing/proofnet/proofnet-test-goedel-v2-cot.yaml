@@ -1,0 +1,11 @@
+# Goedel-Prover-V2-8B (CoT / proof-plan prompt) on ProofNet test.
+prover: configs/models/goedel-prover-v2-8b.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: goedel-v2-proofnet-test-cot
+
+num_attempts: 32
+batch_size: 16

@@ -1,8 +1,0 @@
-# TODO run: Goedel-Prover-DPO SinglePassProver on ProofNet valid split.
-prover: configs/models/goedel-dpo-single-pass-vllm.yaml
-
-dataset_path: data/proofnet.jsonl
-split: valid
-
-num_attempts: 64
-batch_size: 16

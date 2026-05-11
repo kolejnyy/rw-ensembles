@@ -1,0 +1,11 @@
+# Goedel-Prover-SFT (completion / non-CoT) on miniF2F-rw test.
+prover: configs/models/goedel-sft-single-pass-vllm.yaml
+
+dataset_path: data/minif2f-rw.jsonl
+split: test
+
+dataset_name: minif2f-rw
+experiment_id: goedel-sft-miniF2F-rw-test-noncot
+
+num_attempts: 64
+batch_size: 64

@@ -1,0 +1,11 @@
+# DeepSeek-Prover-V2 (CoT prompt) on ProofNet test.
+prover: configs/models/deepseek-cot.yaml
+
+dataset_path: data/proofnet.jsonl
+split: test
+
+dataset_name: proofnet
+experiment_id: deepseek-proofnet-test-cot
+
+num_attempts: 32
+batch_size: 16
