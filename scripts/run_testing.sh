@@ -1,7 +1,7 @@
 export REPO_ROOT=/path/to/repo
 cd $REPO_ROOT
-export ORCH_CONFIG=configs/testing/minif2f-deepseek-vllm-valid.yaml
-export ORCH_EXPERIMENT_ID=deepseek-vllm/minif2f-valid
+export ORCH_CONFIG=configs/testing/miniF2F/minif2f-valid-deepseek-noncot.yaml
+export ORCH_EXPERIMENT_ID=deepseek-miniF2F-valid-noncot
 
 mkdir -p ".slurm/pipeline/${ORCH_EXPERIMENT_ID}"
 sbatch \

@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--root",
         type=Path,
-        default=Path("results/minif2f-aug/valid/deepseek-single-pass"),
+        default=Path("results/minif2f-rw/valid/deepseek-miniF2F-rw-valid-noncot"),
         help="Root directory containing per-problem subdirs with attempts.jsonl",
     )
     p.add_argument(

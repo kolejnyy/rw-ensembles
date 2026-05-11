@@ -16,9 +16,9 @@ Configurations
 Usage
 -----
     python make_analysis_table.py \\
-        --valid-dir results/minif2f-aug/valid/deepseek-single-pass \\
-        --test-dir  results/minif2f-aug/test/deepseek-single-pass  \\
-        --out-dir   results/minif2f-aug/.analysis
+        --valid-dir results/minif2f-rw/valid/deepseek-miniF2F-rw-valid-noncot \\
+        --test-dir  results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot  \\
+        --out-dir   results/minif2f-rw/.analysis
 
 Both --valid-dir and --test-dir accept either:
   * the split result directory (auto-appends /.reverification_by_problem), or
@@ -445,8 +445,8 @@ def main() -> int:
 
     if args.valid_dir is None and args.test_dir is None:
         # Attempt defaults
-        default_valid = Path("results/minif2f-aug/valid/deepseek-single-pass")
-        default_test = Path("results/minif2f-aug/test/deepseek-single-pass")
+        default_valid = Path("results/minif2f-rw/valid/deepseek-miniF2F-rw-valid-noncot")
+        default_test = Path("results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot")
         if default_valid.exists():
             args.valid_dir = default_valid
         if default_test.exists():
@@ -463,12 +463,12 @@ def main() -> int:
         revdir = resolve_reverification_dir(args.valid_dir.resolve())
         if not revdir.is_dir():
             sys.exit(f"Directory not found: {revdir}")
-        splits_input.append(("valid", r"\textit{minif2f-aug-valid}", revdir))
+        splits_input.append(("valid", r"\textit{minif2f-rw-valid}", revdir))
     if args.test_dir is not None:
         revdir = resolve_reverification_dir(args.test_dir.resolve())
         if not revdir.is_dir():
             sys.exit(f"Directory not found: {revdir}")
-        splits_input.append(("test", r"\textit{minif2f-aug-test}", revdir))
+        splits_input.append(("test", r"\textit{minif2f-rw-test}", revdir))
 
     # Output directory
     if args.out_dir is not None:

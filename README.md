@@ -31,10 +31,10 @@ Run this from the repository root on a machine with a CUDA GPU (interactive shel
 
 ```bash
 conda activate rwens
-python scripts/src/eval/generate_solutions.py --config configs/testing/miniF2F/minif2f-deepseek-single-pass-baseline.yaml
+python scripts/src/eval/generate_solutions.py --config configs/testing/miniF2F/minif2f-valid-deepseek-noncot.yaml
 ```
 
-The YAML points at a prover model config (`prover:`), dataset (`dataset_path`, `split`), sampling settings (`num_attempts`, `batch_size`), and an output namespace (`experiment_id`). With `minif2f-deepseek-single-pass-baseline.yaml`, outputs are written under:
+The YAML points at a prover model config (`prover:`), dataset (`dataset_path`, `split`), sampling settings (`num_attempts`, `batch_size`), and an output namespace (`experiment_id`). With `minif2f-valid-deepseek-noncot.yaml`, outputs are written under:
 
 `results/minif2f/valid/deepseek-miniF2F-valid-noncot/`
 

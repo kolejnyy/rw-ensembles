@@ -18,9 +18,9 @@ over those run scores.
 Usage
 -----
     python make_pass_at_k_table.py \\
-        --valid-dir results/minif2f-aug/valid/deepseek-single-pass \\
-        --test-dir  results/minif2f-aug/test/deepseek-single-pass  \\
-        --out-dir   results/minif2f-aug/.analysis-pass-at-k
+        --valid-dir results/minif2f-rw/valid/deepseek-miniF2F-rw-valid-noncot \\
+        --test-dir  results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot  \\
+        --out-dir   results/minif2f-rw/.analysis-pass-at-k
 
 Path resolution for --valid-dir / --test-dir matches ``make_analysis_table.py``.
 """
@@ -363,8 +363,8 @@ def main() -> int:
     args = parse_args()
 
     if args.valid_dir is None and args.test_dir is None:
-        default_valid = Path("results/minif2f-aug/valid/deepseek-single-pass")
-        default_test = Path("results/minif2f-aug/test/deepseek-single-pass")
+        default_valid = Path("results/minif2f-rw/valid/deepseek-miniF2F-rw-valid-noncot")
+        default_test = Path("results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot")
         if default_valid.exists():
             args.valid_dir = default_valid
         if default_test.exists():
@@ -380,12 +380,12 @@ def main() -> int:
         revdir = resolve_reverification_dir(args.valid_dir.resolve())
         if not revdir.is_dir():
             sys.exit(f"Directory not found: {revdir}")
-        splits_input.append(("valid", r"\textit{minif2f-aug-valid}", revdir))
+        splits_input.append(("valid", r"\textit{minif2f-rw-valid}", revdir))
     if args.test_dir is not None:
         revdir = resolve_reverification_dir(args.test_dir.resolve())
         if not revdir.is_dir():
             sys.exit(f"Directory not found: {revdir}")
-        splits_input.append(("test", r"\textit{minif2f-aug-test}", revdir))
+        splits_input.append(("test", r"\textit{minif2f-rw-test}", revdir))
 
     if args.out_dir is not None:
         out_dir = args.out_dir.resolve()

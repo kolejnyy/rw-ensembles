@@ -271,7 +271,7 @@ Optional flags:
 
 Script: `copy_confirmed_results_proofs.py`
 
-Use this after you have a `confirmed_rewrites_dataset.jsonl` and a full `results/...` tree from proof generation (e.g. single-pass runs with per-theorem folders containing `attempts.jsonl`). The script walks the confirmed JSONL, collects each distinct `name` field (one row per augmented theorem), and copies the matching subdirectory from `--source-dir` to `--dest-dir`. That lets you materialize a **smaller** results tree that only contains problems present in the confirmed dataset (for example copying from `minif2f-aug-test` into a shorter path like `minif2f-aug`).
+Use this after you have a `confirmed_rewrites_dataset.jsonl` and a full `results/...` tree from proof generation (e.g. single-pass runs with per-theorem folders containing `attempts.jsonl`). The script walks the confirmed JSONL, collects each distinct `name` field (one row per augmented theorem), and copies the matching subdirectory from `--source-dir` to `--dest-dir`. That lets you materialize a **smaller** results tree that only contains problems present in the confirmed dataset (for example copying from a full run tree into a shorter path under `minif2f-rw`).
 
 Reads:
 - `confirmed_rewrites_dataset.jsonl` (via `--confirmed-jsonl`)
@@ -289,8 +289,8 @@ Example:
 ```bash
 python scripts/src/data/copy_confirmed_results_proofs.py \
   --confirmed-jsonl data/rewritings_pipeline/minif2f_aug_test_split/confirmed_rewrites_dataset.jsonl \
-  --source-dir results/minif2f-aug-test/test/deepseek-single-pass \
-  --dest-dir results/minif2f-aug/test/deepseek-single-pass
+  --source-dir results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot \
+  --dest-dir results/minif2f-rw/test/deepseek-miniF2F-rw-test-noncot-filtered
 ```
 
 ---

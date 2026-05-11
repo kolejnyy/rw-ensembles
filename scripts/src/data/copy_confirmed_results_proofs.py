@@ -51,13 +51,13 @@ def main() -> int:
     p.add_argument(
         "--source-dir",
         type=Path,
-        default=root / "results" / "minif2f-aug-test" / "test" / "deepseek-single-pass",
+        default=root / "results" / "minif2f-rw" / "test" / "deepseek-miniF2F-rw-test-noncot",
         help="Base directory containing subfolders named after ``name``.",
     )
     p.add_argument(
         "--dest-dir",
         type=Path,
-        default=root / "results" / "minif2f-aug" / "test" / "deepseek-single-pass",
+        default=root / "results" / "minif2f-rw" / "test" / "deepseek-miniF2F-rw-test-noncot-confirmed",
         help="Destination base directory (created if missing).",
     )
     p.add_argument(
