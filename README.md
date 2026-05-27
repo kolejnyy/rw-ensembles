@@ -1,6 +1,6 @@
-# Invariant Formal Provers
+# What are the Right Symmetries for Formal Theorem Proving?
 
-A research project on proof-invariant formal provers in Lean4.
+Code implementing rewriting ensembles, introduced in the paper "What are the Right Symmetries for Formal Theorem Proving?".
 
 ## Installation
 
